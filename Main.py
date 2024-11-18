@@ -127,10 +127,10 @@ def flag_check(query):
                             "SecondaryCaseType": " ",
                             "CaseRating": " ",
                             "CaseState" : " ",
-                            "IsWorkersCompensation (Yes/No)?": " ",
+                            "IsWorkersCompensation(Yes/No)?": " ",
                             "Confidence(%)": " ",
                             "Explanation": "{e}",
-                            "Handling Firm" : "Unknown"
+                            "HandlingFirm" : "Unknown"
                         }}'''.format(e=expl)
                # print (final_result)
 
@@ -143,10 +143,10 @@ def flag_check(query):
                         "SecondaryCaseType": " ",
                         "CaseRating": " ",
                         "CaseState" : " ",
-                        "IsWorkersCompensation (Yes/No)?": " ",
+                        "IsWorkersCompensation(Yes/No)?": " ",
                         "Confidence(%)": " ",
                         "Explanation": "There is some error occured while answering your question, Please try with same case description again.  Sorry for an inconvenience Caused",
-                        "Handling Firm" : "Unknown"
+                        "HandlingFirm" : "Unknown"
                     }
                     '''
                 #return final_result

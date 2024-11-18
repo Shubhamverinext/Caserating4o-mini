@@ -71,26 +71,40 @@ class caseClassifier:
         Instruction: In description CL stands for client.Examine the description considering CL as client for answers.
         Select Primary Case Type and Secondary Case Type strictly from below list only, do not make up any other case type:
         Primary Case Types:
-            - Employment Law
-            - General Injury
-            - Long-Term Disability
-            - Mass Tort
-            - Nursing Home
+            - Employment Law: Case addresses disputes between employers and employees, including issues like discrimination, harassment, wrongful termination, wage disputes, and workplace rights violations.
+            - General Injury: Case involves claims for physical or emotional harm caused by another's negligence or intentional actions, covering accidents, slips, falls, or similar incidents.
+            - Long-Term Disability: Case involves claims for benefits when an individual is unable to work due to a severe, prolonged medical condition, often against insurers or employers.
+            - Mass Tort: Case involves multiple plaintiffs filing claims against a defendant for widespread harm caused by defective products, pharmaceuticals, or large-scale disasters.
+            - Nursing Home: Case addresses claims of abuse, neglect, or substandard care within nursing facilities, seeking justice and compensation for harm to residents' well-being.
             - Other
-            - Workers Compensation
-            - Workers Compensation Federal
-            - Wrongful Death
+            - Workers Compensation: Case involves claims by employees for benefits due to workplace injuries or illnesses, covering medical costs, lost wages, and rehabilitation without proving employer fault.
+            - Workers Compensation Federal: Case involves federal employees seeking benefits for job-related injuries or illnesses, providing medical coverage, wage replacement, and rehabilitation under federal law.
+            - Wrongful Death: Case involves claims by surviving family members seeking compensation when a loved one’s death is caused by another’s negligence or intentional actions.
+            - Veteran Disability: case involves claims by veterans seeking disability benefits for injuries or conditions resulting from their military service, often filed against the VA (Department of Veterans Affairs).
+            - Wills, Estate and Probate: Case involves the validation, execution, distribution, or dispute of a deceased person's estate and will.
+            - General Class Action: Case occurs when a group of people collectively sue a defendant for common grievances, usually involving large-scale harm or violations.
+            - Criminal: Case involves the prosecution of an individual or entity accused of committing a crime, with penalties such as fines, imprisonment, or other sanctions.
+            - Negligent Security: Case arises when a property owner fails to provide adequate security measures, leading to harm or injury to individuals on the premises.
+            - Product Liability (auto): Case involves a claim against a manufacturer or seller for injuries or damages caused by a defective or unsafe vehicle or auto part.
 
         Secondary Case Types:
-            - Animal Incident
-            - Automobile Accident
-            - Construction
-            - Dental Malpractice
-            - Medical Malpractice
-            - Nursing Home
-            - Police Brutality
-            - Product Liability
-            - Slip and Fall
+            - Animal Incident: Case occurs when an individual is injured or harmed due to an animal’s actions, such as bites, attacks, or negligence by the owner.
+            - Automobile Accident: Case involves claims for injuries, damages, or liability resulting from a collision or crash between vehicles, often involving negligence or traffic violations.
+            - Construction: Case involves disputes or claims related to construction projects, such as contract breaches, negligence, safety violations, or defects in design or workmanship. 
+            - Dental Malpractice: Case occurs when a dentist's negligence, improper treatment, or failure to meet the standard of care causes harm or injury to a patient.
+            - Medical Malpractice: Case arises when a healthcare provider's negligence, substandard care, or errors cause injury, harm, or death to a patient.
+            - Nursing Home: Case addresses claims of abuse, neglect, or substandard care within nursing facilities, seeking justice and compensation for harm to residents' well-being.
+            - Police Brutality: Case involves claims of excessive force, abuse, or unlawful actions by law enforcement officers that result in injury, harm, or violation of rights.
+            - Product Liability (auto): Case involves a claim against a manufacturer or seller for injuries or damages caused by a defective or unsafe vehicle or auto part.
+            - Product Liability (non-auto): Case involves a claim against a manufacturer or seller for injuries or damages caused by a defective or unsafe non-automotive product.
+            - Slip and Fall: Case arises when an individual is injured due to hazardous conditions, like wet floors or uneven surfaces, on someone else's property.
+            - Unemployment Claims: Case involves disputes over eligibility, denial, or challenges related to an individual’s claim for unemployment benefits from a state or employer.
+            - Wage & Hour: Case involves disputes over fair compensation, such as unpaid wages, overtime, misclassification, or violations of labor laws regarding work hours.
+            - Veteran Disability: case involves claims by veterans seeking disability benefits for injuries or conditions resulting from their military service, often filed against the VA (Department of Veterans Affairs).
+            - Wills, Estate and Probate: Case involves the validation, execution, distribution, or dispute of a deceased person's estate and will.
+            - General Class Action: Case occurs when a group of people collectively sue a defendant for common grievances, usually involving large-scale harm or violations.
+            - Criminal: Case involves the prosecution of an individual or entity accused of committing a crime, with penalties such as fines, imprisonment, or other sanctions.
+            - Negligent Security: Case arises when a property owner fails to provide adequate security measures, leading to harm or injury to individuals on the premises.
 
         Case Rating is depends on severity of an injury. Tier 5 is severe/major injury while Tier 1 is minor injury.
         Case Rating for various case types is given below, use that information for case ratings:
@@ -244,7 +258,7 @@ class caseClassifier:
                 "SecondaryCaseType": " ",
                 "CaseRating": " ",
                 "CaseState" : " ",
-                "IsWorkersCompensation (Yes/No)?": " ",
+                "IsWorkersCompensation(Yes/No)?": " ",
                 "Confidence(%)": " ",
                 "Explanation": "There is some error occured while answering your question, Please try with same case description again.  Sorry for an inconvenience Caused"
             }
@@ -312,16 +326,16 @@ class caseClassifier:
                     logging.error('An error occurred creating handling firm rules prompt: %s', e)
                     hf_result = '''
                     {
-                        "Handling Firm" : "SAD"
+                        "HandlingFirm" : "SAD"
                     }
                     '''
                     #return hf_result
             else:
                 # Set case state to unknown if rules are not found
-                qa_result["Case State"] = "Unknown"
+                qa_result["CaseState"] = "Unknown"
                 hf_result = '''
                 {
-                    "Handling Firm" : "SAD"
+                    "HandlingFirm" : "SAD"
                 }
                 '''
             return hf_result
@@ -330,7 +344,7 @@ class caseClassifier:
             logging.error('An error occurred while reading firm rules file: %s', e)
             hf_result = '''
             {
-                "Handling Firm" : "SAD"
+                "HandlingFirm" : "SAD"
             }
             '''
             return hf_result
@@ -381,11 +395,11 @@ def process_query(query):
             "PrimaryCaseType": " ",
             "SecondaryCaseType": " ",
             "CaseRating": " ",
-            "Case State" : " ",
-            "Is Workers Compensation (Yes/No)?": " ",
+            "CaseState" : " ",
+            "IsWorkersCompensation(Yes/No)?": " ",
             "Confidence(%)": " ",
             "Explanation": "There is some error occured while answering your question, Please try with same case description again.  Sorry for an inconvenience Caused",
-            "Handling Firm" : "Unknown"
+            "HandlingFirm" : "Unknown"
             "CaseId" : " "
         }
         '''
@@ -393,13 +407,13 @@ def process_query(query):
     hf_response = app.hf_send(query, qa_result)
     try:
         firm_response = json.loads(hf_response)
-        qa_result["Handling Firm"] = firm_response["Handling Firm"]
+        qa_result["HandlingFirm"] = firm_response["HandlingFirm"]
         qa_result["Explanation"] = qa_result["Explanation"] + "\n\n" + firm_response["Assignment Explanation"]
         qa_result["CaseId"] = str(generated_uuid)
         final_result = json.dumps(qa_result)
     except Exception as error:
         logging.error('An error occurred while processing handling firm response: %s', error)
-        qa_result["Handling Firm"] = "SAD"
+        qa_result["HandlingFirm"] = "SAD"
         qa_result["CaseId"] = str(generated_uuid)
         final_result = json.dumps(qa_result)
 
